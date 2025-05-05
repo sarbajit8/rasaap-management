@@ -55,6 +55,27 @@ function TeleLeaderLayout() {
             <ListCheckIcon size={22} />
             <span className="text-lg font-semibold">Packages</span>
           </Link>
+          <Link
+            to="/admin/data"
+            className="flex items-center space-x-3 text-gray-700 hover:text-pink-500 transition-all duration-200 hover:scale-105"
+          >
+            <ListCheckIcon size={22} />
+            <span className="text-lg font-semibold">Company Data</span>
+          </Link>
+          <Link
+            to="/admin/graphics"
+            className="flex items-center space-x-3 text-gray-700 hover:text-pink-500 transition-all duration-200 hover:scale-105"
+          >
+            <ListCheckIcon size={22} />
+            <span className="text-lg font-semibold">Add Graphics</span>
+          </Link>
+          {/* <Link
+            to="/admin/kyclinks"
+            className="flex items-center space-x-3 text-gray-700 hover:text-pink-500 transition-all duration-200 hover:scale-105"
+          >
+            <ListCheckIcon size={22} />
+            <span className="text-lg font-semibold"></span>
+          </Link> */}
           <button
             onClick={handleLogout}
             className="flex items-center justify-center space-x-2 text-white bg-red-500 px-4 py-2 rounded-xl w-full mt-16 shadow-md hover:bg-red-600 transition"
@@ -86,7 +107,7 @@ function TeleLeaderLayout() {
             >
               <Menu size={26} />
             </button>
-            <h1 className="text-2xl font-bold text-gray-800">Tele Sales Leader Dashboard</h1>
+            <h1 className="text-2xl font-bold text-gray-800">Admin Dashboard</h1>
           </div>
         </header>
 

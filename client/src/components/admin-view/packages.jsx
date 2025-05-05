@@ -3,6 +3,7 @@ import React from 'react'
 import { Tabs,TabsContent, TabsList, TabsTrigger } from '../../components/ui/tabs'
 import AddPackages from './addPackages'
 import AddServices from './addServices'
+import AddKycLinks from './addKycLinks'
 
 
 
@@ -22,6 +23,8 @@ const Packages = () => {
 
             <TabsTrigger value="packages">Packages</TabsTrigger>
             <TabsTrigger value="services">Services</TabsTrigger>
+            <TabsTrigger value="kyc">Kyc Links</TabsTrigger>
+
 
 </div>
             </TabsList>
@@ -30,7 +33,10 @@ const Packages = () => {
             </TabsContent>
             <TabsContent value='services' >
               <AddServices/>
-            </TabsContent>        
+            </TabsContent>      
+            <TabsContent value='kyc' >
+              <AddKycLinks/>
+            </TabsContent>   
           </Tabs>
 
         </div>

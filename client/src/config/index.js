@@ -32,7 +32,17 @@ export const registerFormControls = [
       type: "password",
     },
   ];
+  export const imageFormControls = [
+    {
+      name: "userName",
+      label: "User Name",
+      placeholder: "Enter your user name",
+      componentType: "input",
+      type: "text",
+    },
   
+   
+  ];
   export const loginFormControls = [
     {
       name: "email",

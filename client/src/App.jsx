@@ -32,6 +32,11 @@ import ViewData from './pages/sales/tele-sales/viewData'
 import AssignPackagesTs from './components/sales/tele-sales/assignPackagesTs'
 import ViewFlData from './pages/sales/field-sales-tl/viewFlData'
 import ViewFsData from './pages/sales/field-sales/viewFsData'
+import CompanyData from './pages/admin-view/companyData'
+import AssignPackagesTl from './components/sales/field-sales-tl/assignPackagesTl'
+import AssignPackagesFs from './components/sales/field-sales/assignPackagesFs'
+import AssignPackagesAdmin from './components/admin-view/assignPackagesAdmin'
+import AddGraphics from './pages/admin-view/addGraphics'
 
 
 
@@ -84,11 +89,15 @@ function App() {
       <Route path="warning/:employeeId" element={<AdminWarning/>}/>
       <Route path="terminate/:employeeId" element={<AdminTerminate/>}/>
       <Route path="packages" element={<Packages/>}/>
+      <Route path="data" element={<CompanyData/>}/>
+      <Route  path="assignpackages/:id" element={<AssignPackagesAdmin/>}/>    
+      <Route  path="graphics" element={<AddGraphics/>}/>    
 
 
 
 
-       
+
+      
       
       
       </Route>
@@ -130,6 +139,7 @@ function App() {
        </CheckAuth>}>             
       <Route path="dashboard" element={<FieldSalesDashboard/>}/>    
       <Route path="viewdata" element={<ViewFsData/>}/>    
+      <Route  path="assignpackages/:id" element={<AssignPackagesFs/>}/>    
 
 
 
@@ -142,8 +152,9 @@ function App() {
          </CheckAuth>}>
       <Route path="dashboard" element={<FieldLidDashboard/>}/>    
       <Route path="viewdata" element={<ViewFlData/>}/>    
+      <Route  path="assignpackages/:id" element={<AssignPackagesTl/>}/>    
 
-
+      
       
       </Route>
 

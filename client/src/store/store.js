@@ -10,6 +10,10 @@ import assignPackageSlice from "../store/tstl/assignPackage-slice/index";
 
 import serviceSlice from "../store/admin/services-slice";
 import packageSlice from "../store/admin/packages-slice";
+import kycLinksSlice from "../store/admin/kyclink-slice";
+import addImageSlice from "../store/admin/AddImage-slice";
+
+
 
 
 
@@ -30,9 +34,9 @@ const store = configureStore({
     adddata:adddataSlice,
     service:serviceSlice,
     package:packageSlice,
-    assignPackage:assignPackageSlice
-
-
+    assignPackage:assignPackageSlice,
+    kycLink:kycLinksSlice,
+    addImage:addImageSlice
   },
 });
 

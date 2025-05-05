@@ -17,6 +17,7 @@ import {
   CardTitle,
 } from "../../../components/ui/card";
 import { Tabs, TabsContent } from "../../../components/ui/tabs";
+import { PenBox, Save, Trash2Icon } from "lucide-react";
 
 const ViewFsData = () => {
   const dispatch = useDispatch();
@@ -68,7 +69,42 @@ const ViewFsData = () => {
       },
     ]);
   };
-
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  
+    // Check for empty required fields
+    for (let i = 0; i < forms.length; i++) {
+      const form = forms[i];
+      if (!form.companyName || !form.address || !form.phoneNo || !form.type) {
+        toast({ title: "Please fill in all required fields.", variant: "destructive" });
+        return; // Stop the form submission if any required field is empty
+      }
+    }
+  
+    // If all required fields are filled, submit the data
+    const dataToSubmit = forms.map((form) => ({
+      ...form,
+      employeeId,
+      employeeName,
+    }));
+  
+    dispatch(addCompanyDetails({ employeeId, employeeName, companies: dataToSubmit })).then((res) => {
+      if (res?.payload?.success) {
+        toast({ title: "Companies added successfully!" });
+        dispatch(fetchAllCompanyDetails()); // Refresh company details after adding
+        setForms([{
+          companyName: '',
+          address: '',
+          phoneNo: '',
+          type: '',
+          assignedfs: '',
+          status: 'appointment', // Default status is 'appointment'
+        }]); // Reset form after submission
+      } else {
+        console.error('Error:', res.payload); // Log error if present
+      }
+    });
+  };
   const handleRemoveForm = (index) => {
     const updatedForms = forms.filter((_, i) => i !== index);
     setForms(updatedForms);
@@ -140,6 +176,112 @@ const ViewFsData = () => {
   return (
     <div className="container mx-auto grid grid-cols-1 gap-8 py-8">
       <div className="flex flex-col rounded-lg border bg-background p-6 shadow-sm">
+      <h2 className="text-2xl font-semibold text-gray-700 mb-4">Add Company Details</h2>
+
+{/* Form Inputs */}
+<form onSubmit={handleSubmit} className="space-y-4">
+  {forms.map((form, index) => (
+    <div key={index} className="space-y-4 border p-4 rounded-md shadow-sm">
+      <div className="flex justify-between items-center">
+        <h3 className="font-semibold text-lg">Company {index + 1}</h3>
+        <div>
+          {index > 0 && (
+            <button
+              type="button"
+              onClick={() => handleRemoveForm(index)}
+              className="text-red-500 hover:text-red-700 text-2xl px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-red-600 transition-all duration-200"
+            >
+              -
+            </button>
+          )}
+          {index === forms.length - 1 && (
+            <button
+              type="button"
+              onClick={handleAddForm}
+              className="text-green-500 hover:text-green-700 text-2xl px-4 py-2 ml-2 rounded-full focus:outline-none focus:ring-2 focus:ring-green-600 transition-all duration-200"
+            >
+              +
+            </button>
+          )}
+        </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <input
+          type="text"
+          name="companyName"
+          placeholder="Company Name"
+          value={form.companyName}
+          onChange={(e) => handleInputChange(index, e)}
+          className="border rounded p-2"
+        />
+        <input
+          type="text"
+          name="address"
+          placeholder="Address"
+          value={form.address}
+          onChange={(e) => handleInputChange(index, e)}
+          className="border rounded p-2"
+        />
+        <input
+          type="text"
+          name="phoneNo"
+          placeholder="Phone Number"
+          value={form.phoneNo}
+          onChange={(e) => handleInputChange(index, e)}
+          className="border rounded p-2"
+        />
+        <input
+          type="text"
+          name="type"
+          placeholder="Type"
+          value={form.type}
+          onChange={(e) => handleInputChange(index, e)}
+          className="border rounded p-2"
+        />
+        {/* <select
+          name="assignedfs"
+          value={form.assignedfs}
+          onChange={(e) => handleInputChange(index, e)}
+          className="border rounded p-2"
+        >
+          <option value="">Select Assigned</option>
+          {allUsers && allUsers.filter(user => user.role === "fs").map((user) => (
+            <option key={user._id} value={user.userName}>{user.userName}</option>
+          ))}
+        </select> */}
+        <input
+  type="text"
+  name="status"
+  value="appointment"
+  onChange={(e) => handleInputChange(index, e)}
+
+  readOnly
+  className="border rounded p-2"
+  style={{ display: "none" }}  // Hides the input completely
+/>
+
+        <select
+          name="statusfs"
+          value={form.statusfs}
+          onChange={(e) => handleInputChange(index, e)}
+          className="border rounded p-2"
+        >
+          <option value="">Select Status</option>
+          <option value="closed">Closed</option>
+          <option value="lost">Lost</option>
+         <option value="new">New</option>
+       <option value="inprogress">In Progress</option>
+        </select>
+      </div>
+    </div>
+  ))}
+  <button
+    type="submit"
+    className="w-full bg-blue-500 text-white p-2 rounded-lg shadow-md hover:bg-blue-600"
+  >
+    Submit
+  </button>
+</form>
         <Tabs defaultValue="orders">
           <TabsContent value="orders">
             <Card className="w-full mx-auto my-4 p-4 bg-white shadow-md rounded-lg overflow-x-auto">
@@ -164,8 +306,9 @@ const ViewFsData = () => {
               </CardHeader>
 
               <CardContent>
-                <table className="min-w-full table-auto border-collapse">
-                  <thead>
+              <div className="overflow-x-auto max-h-[400px]">
+      <table className="min-w-full table-auto border-collapse">
+        <thead className="sticky top-0 bg-gray-200 z-10">
                     <tr>
                       <th className="border p-2">Company Name</th>
                       <th className="border p-2">Address</th>
@@ -264,36 +407,38 @@ const ViewFsData = () => {
 
                             <td className="border p-2">
                               {editingRowIndex === company._id ? (
-                                <Button
+                                <button
                                   onClick={() =>
                                     handleSave(company._id, company.employeeId)
                                   }
-                                  className="bg-green-500 hover:bg-green-700"
+                                  className="text-green-500 hover:text-green-700"
                                 >
-                                  Save
-                                </Button>
+                                  <Save />
+
+                                </button>
                               ) : (
-                                <Button
+                                <button
                                   onClick={() => handleEdit(company._id)}
-                                  className="bg-blue-500 hover:bg-blue-700 mr-2"
+                                  className="text-blue-500 hover:text-blue-700 mr-2"
                                 >
-                                  Edit
-                                </Button>
+                                    <PenBox />
+                                </button>
                               )}
-                              <Button
+                              <button
                                 onClick={() =>
                                   handleDelete(company._id, company.employeeId)
                                 }
-                                className="bg-red-500 hover:bg-red-700"
+                                className="text-red-500 hover:text-red-700"
                               >
-                                Delete
-                              </Button>
+                               <Trash2Icon/>
+                              </button>
                             </td>
                           </tr>
                         ))
                     )}
                   </tbody>
                 </table>
+                </div>
               </CardContent>
             </Card>
           </TabsContent>

@@ -145,7 +145,7 @@ const AddServices = () => {
                     )}
                   </td>
                   <td className="border p-2">
-                    {editingServiceId === service._id ? (
+                    {/* {editingServiceId === service._id ? (
                       <button
                         onClick={handleSaveService}
                         className="text-green-500 hover:text-green-700 mr-2"
@@ -159,7 +159,7 @@ const AddServices = () => {
                       >
                         Edit
                       </button>
-                    )}
+                    )} */}
                     <button
                       onClick={() => handleDeleteService(service._id)}
                       className="text-red-500 hover:text-red-700"

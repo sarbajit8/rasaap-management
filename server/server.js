@@ -18,6 +18,10 @@ const AssignPackageRouter = require('./routes/tstl/assignPackage-routes');
 
 const ServicesRouter = require('./routes/admin/services-routes');
 const PackagesRouter = require('./routes/admin/package-routes');
+const KycLinkRouter = require('./routes/admin/kycLinks-routes');
+const AddImageRouter = require('./routes/admin/addImage-routes');
+
+
 
 
 
@@ -81,6 +85,11 @@ app.use("/api/teleleader/assignpackage", AssignPackageRouter);
 
 app.use("/api/admin/services", ServicesRouter);
 app.use("/api/admin/packages", PackagesRouter);
+app.use("/api/admin/kyc-links", KycLinkRouter);
+app.use("/api/admin/addImage", AddImageRouter);
+
+
+
 
 
 
