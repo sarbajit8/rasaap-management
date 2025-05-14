@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { logoutUser } from "../../store/auth-slice/index";
 
-function AdminLayout() {
+function EcomAdminLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const dispatch = useDispatch();
 
@@ -35,40 +35,13 @@ function AdminLayout() {
         </div>
         <nav className="px-4 mt-6 space-y-6">
         <Link
-            to="/admin/dashboard"
+            to="/admin/e-dashboard"
             className="flex items-center space-x-3 text-gray-700 hover:text-pink-500 transition-all duration-200 hover:scale-105"
           >
             <LayoutDashboard size={22} />
             <span className="text-lg font-semibold">Dashboard</span>
           </Link>
-          <Link
-            to="/admin/employee"
-            className="flex items-center space-x-3 text-gray-700 hover:text-pink-500 transition-all duration-200 hover:scale-105"
-          >
-            <User size={22} />
-            <span className="text-lg font-semibold">Employees</span>
-          </Link>
-          <Link
-            to="/admin/packages"
-            className="flex items-center space-x-3 text-gray-700 hover:text-pink-500 transition-all duration-200 hover:scale-105"
-          >
-            <ListCheckIcon size={22} />
-            <span className="text-lg font-semibold">Packages</span>
-          </Link>
-          <Link
-            to="/admin/data"
-            className="flex items-center space-x-3 text-gray-700 hover:text-pink-500 transition-all duration-200 hover:scale-105"
-          >
-            <ListCheckIcon size={22} />
-            <span className="text-lg font-semibold">Company Data</span>
-          </Link>
-          <Link
-            to="/admin/graphics"
-            className="flex items-center space-x-3 text-gray-700 hover:text-pink-500 transition-all duration-200 hover:scale-105"
-          >
-            <ListCheckIcon size={22} />
-            <span className="text-lg font-semibold">Add Graphics</span>
-          </Link>
+      
           {/* <Link
             to="/admin/kyclinks"
             className="flex items-center space-x-3 text-gray-700 hover:text-pink-500 transition-all duration-200 hover:scale-105"
@@ -122,4 +95,4 @@ function AdminLayout() {
 
 
 
-export default AdminLayout
+export default EcomAdminLayout

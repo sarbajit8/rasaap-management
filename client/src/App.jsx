@@ -37,6 +37,10 @@ import AssignPackagesTl from './components/sales/field-sales-tl/assignPackagesTl
 import AssignPackagesFs from './components/sales/field-sales/assignPackagesFs'
 import AssignPackagesAdmin from './components/admin-view/assignPackagesAdmin'
 import AddGraphics from './pages/admin-view/addGraphics'
+import AdminHome from './pages/admin-view/adminHome'
+import AdminLayout2 from './components/admin-view/adminLayout'
+import EcomAdminLayout from './components/ecom-admin-view/layout'
+import EcomDashboard from './pages/ecom-admin-view/dashboard'
 
 
 
@@ -80,9 +84,17 @@ function App() {
 
       <Route path="/admin" element={
         <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+          <AdminLayout2/>
+        </CheckAuth>
+        }>
+      <Route path="home" element={<AdminHome/>}/>
+   </Route>
+      <Route path="/admin" element={
+        <CheckAuth isAuthenticated={isAuthenticated} user={user}>
           <AdminLayout/>
         </CheckAuth>
         }>
+
       <Route path="dashboard" element={<AdminDashboard/>}/>
       <Route path="attendance-details/:id" element={<AttendanceDetails/>}/>
       <Route path="employee" element={<EmployeeList/>}/>
@@ -101,6 +113,17 @@ function App() {
       
       
       </Route>
+
+
+      <Route path="/admin" element={
+        <CheckAuth isAuthenticated={isAuthenticated} user={user}>
+          <EcomAdminLayout/>
+        </CheckAuth>
+        }>
+                <Route path="e-dashboard" element={<EcomDashboard/>}/>
+
+          
+          </Route>
 
       {/* <Route path="/employee" element={<EmployeeLayout/>}>
       <Route path="dashboard" element={<EmployeeDashboard/>}/>

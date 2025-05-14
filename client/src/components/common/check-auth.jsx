@@ -6,7 +6,7 @@ function CheckAuth({ isAuthenticated, user, children }) {
 
   const getDashboardPath = (role) => {
     switch (role) {
-      case "admin": return "/admin/dashboard";
+      case "admin": return "/admin/home";
       case "ts": return "/telesales/dashboard";
       case "tl": return "/telesalestl/dashboard";
       case "fs": return "/fieldsales/dashboard";
@@ -55,7 +55,7 @@ function CheckAuth({ isAuthenticated, user, children }) {
 
   // Case 5: Prevent admins from accessing sales routes
   if (isAuthenticated && role === "admin" && isSalesRoute) {
-    return <Navigate to="/admin/dashboard" />;
+    return <Navigate to="/admin/home" />;
   }
 
   return <>{children}</>;

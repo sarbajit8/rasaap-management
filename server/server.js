@@ -52,7 +52,7 @@ app.use(
     cors(
         {
         // origin: process.env.CLIENT_BASE_URL,
-        origin: "http://localhost:5173",
+        origin: "http://localhost:5173"||"http://localhost:5174",
         // origin:"*", 
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         allowedHeaders: [
